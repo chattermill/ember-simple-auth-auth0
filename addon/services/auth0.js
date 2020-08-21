@@ -213,10 +213,9 @@ export default Service.extend({
    */
   showLock(options, clientID = null, domain = null, passwordless = false) {
     return new RSVP.Promise((resolve, reject) => {
-      this._getAuth0LockInstance(options, clientID, domain, passwordless).then(lock => {
-        this._setupLock(lock, resolve, reject);
-        lock.show();
-      }, reject);
+      const lock = this._getAuth0LockInstance(options, clientID, domain, passwordless);
+      this._setupLock(lock, resolve, reject);
+      lock.show();
     });
   },
 
