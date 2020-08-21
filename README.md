@@ -10,6 +10,26 @@ Auth0's [Lock](https://github.com/auth0/lock) widget and [Universal Login](https
 
 # Table of Contents
 
+
+## Why?
+
+In the original repository `auth0-lock` is bundled directly in the main vendor bundle.
+
+Auth0-lock itself weights [227.8kb gzipped](https://bundlephobia.com/result?p=auth0-lock@11.26.3) which is huge.
+
+Due to the performance & optimization reasons we have removed that in that fork and added loading of auth0-lock using script tag.
+
+**Example:**
+```html
+<script defer integrity="" src="{{rootURL}}assets/vendor.js"></script>
+<script defer integrity="" src="https://cdn.auth0.com/js/lock/11.26.3/lock.min.js"></script>
+<script defer integrity="" src="{{rootURL}}assets/my-awesome-app.js"></script>
+<!-- defer attribute will load js files in parallel but execute them sequentially -->
+```
+
+**NOTE:** if you are using `ember-auto-import` then `publicAssetURL` should be defined([check docs](https://github.com/ef4/ember-auto-import#customizing-build-behavior)).
+
+
 **Basic Information**
 
 * [What does it do?](#what-does-it-do)
@@ -592,7 +612,7 @@ among other things. As such, there are a few breaking changes to consider for us
 First and foremost, take a look at the following guides from Auth0; these cover most of the requirements:
 * [Migrating from Lock v10 to v11](https://auth0.com/docs/libraries/lock/v11/migration-v10-v11)
 * [Migration Guide for lock-passwordless to Lock v11 with Passwordless Mode](https://auth0.com/docs/libraries/lock/v11/migration-lock-passwordless)
- 
+
 ### Passwordless Auth Changes
 
 For those using this addon with Passwordless authentication, the API for the
@@ -708,7 +728,7 @@ import { authenticateSession, currentSession } from 'ember-simple-auth/test-supp
 
 module('Acceptance | login', function(hooks) {
   setupApplicationTest(hooks);
-  
+
   test('visiting /login redirects to /protected page if authenticated', async function(assert) {
     assert.expect(1);
     const sessionData = {
@@ -717,7 +737,7 @@ module('Acceptance | login', function(hooks) {
 
     await authenticateSession(sessionData);
     await visit('/login');
-    
+
     let session = currentSession(this.application);
     let idToken = get(session, 'data.authenticated.idToken');
     assert.equal(idToken, sessionData.idToken);
@@ -735,7 +755,7 @@ module('Acceptance | login', function(hooks) {
 
     assert.equal(currentURL(), '/protected');
   });
-  
+
 });
 ```
 
