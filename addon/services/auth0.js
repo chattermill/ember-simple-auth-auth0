@@ -88,7 +88,7 @@ export default Service.extend({
    * Default options to use when performing silent authentication.
    * This is a function rather than a computed property since the
    * default redirectUri needs to be regenerated every time.
-   * 
+   *
    * @method _getSilentAuthOptions
    * @return {Object}
    */
@@ -246,18 +246,11 @@ export default Service.extend({
     }
   },
 
-  _getAuth0LockModule() {
-    return import('auth0-lock');
-  },
-
   _getAuth0LockInstance(options, clientID = null, domain = null, passwordless = false) {
     clientID = clientID || get(this, 'clientID');
     domain = domain || get(this, 'domain');
 
-    return this._getAuth0LockModule().then(module => {
-      const Auth0LockConstructor = passwordless ? module.Auth0LockPasswordless : module.Auth0Lock;
-      return new Auth0LockConstructor(clientID, domain, options);
-    })
+    return new Auth0Lock(clientID, domain, options);
   },
 
   _getAuth0Instance(clientID = null, domain = null) {
