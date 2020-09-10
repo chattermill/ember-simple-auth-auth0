@@ -77,7 +77,6 @@
     "auth0-js": "^9.11.3",
     "ember-auto-import": "^1.5.2",
     "ember-cli-babel": "^7.10.0",
-    "ember-simple-auth": "*",
     "webpack": "^4.39.2"
   },
   "ember-addon": {
