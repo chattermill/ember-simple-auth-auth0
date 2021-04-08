@@ -6,7 +6,6 @@ import { isEmpty, isPresent } from '@ember/utils';
 import Service, { inject as service } from '@ember/service';
 import { assign } from '@ember/polyfills';
 import RSVP from 'rsvp';
-import Auth0 from 'auth0-js';
 import createSessionDataObject from '../utils/create-session-data-object';
 import { Auth0Error } from '../utils/errors'
 
@@ -249,14 +248,14 @@ export default Service.extend({
     clientID = clientID || get(this, 'clientID');
     domain = domain || get(this, 'domain');
 
-    return new Auth0Lock(clientID, domain, options);
+    return new window.Auth0Lock(clientID, domain, options);
   },
 
   _getAuth0Instance(clientID = null, domain = null) {
     clientID = clientID || get(this, 'clientID');
     domain = domain || get(this, 'domain');
 
-    return new Auth0.WebAuth({
+    return new window.Auth0.WebAuth({
       domain,
       clientID
     });
