@@ -5,6 +5,11 @@ import Auth0BaseAuthenticator from 'ember-simple-auth-auth0/authenticators/auth0
 export default Auth0BaseAuthenticator.extend({
   auth0: service(),
   authenticate(options) {
-    return get(this, 'auth0').showLock(options);
+    try {
+      return this._performSilentAuth()
+        .catch(() => get(this, 'auth0').showLock(options));
+    } catch (e) {
+      return get(this, 'auth0').showLock(options);
+    }
   },
 });
