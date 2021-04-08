@@ -7,7 +7,7 @@ export default Auth0BaseAuthenticator.extend({
   session: service(),
   authenticate(urlHashData) {
     return new RSVP.Promise((resolve, reject) => {
-      this._resolveAuthResult(urlHashData, resolve, reject);
+      this.auth0.resolveAuthResult(urlHashData, resolve, reject);
     });
   }
 });

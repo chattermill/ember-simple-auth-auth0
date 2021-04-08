@@ -275,6 +275,23 @@ export default Service.extend({
     }
   },
 
+  // resolve the data returned by a parseHash/silentAuth result.
+  resolveAuthResult(authResult, resolve, reject) {
+    if (isEmpty(authResult)) {
+      reject();
+    }
+    const auth0 = this._getAuth0Instance();
+    const getUserInfo = auth0.client.userInfo.bind(auth0.client);
+
+    getUserInfo(authResult.accessToken, (err, profile) => {
+      if (err) {
+        return reject(new Auth0Error(err));
+      }
+
+      resolve(createSessionDataObject(profile, authResult));
+    });
+  },
+
   logout(logoutUrl) {
     get(this, 'session').invalidate().then(() => {
       this._navigateToLogoutURL(logoutUrl);
