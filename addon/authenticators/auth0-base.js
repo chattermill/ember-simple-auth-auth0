@@ -7,9 +7,9 @@ import now from '../utils/now';
 
 export default BaseAuthenticator.extend({
   auth0: service(),
-  restore(data) {
+  restore(data, force = false) {
     const expiresAt = getSessionExpiration(data || {});
-    if(expiresAt > now()) {
+    if(expiresAt > now() && !force) {
       return RSVP.resolve(data);
     } else if(get(this, 'auth0.silentAuthOnSessionRestore')) {
       return this._performSilentAuth()
