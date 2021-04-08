@@ -255,7 +255,7 @@ export default Service.extend({
     clientID = clientID || get(this, 'clientID');
     domain = domain || get(this, 'domain');
 
-    return new window.Auth0.WebAuth({
+    return new window.auth0.WebAuth({
       domain,
       clientID
     });
