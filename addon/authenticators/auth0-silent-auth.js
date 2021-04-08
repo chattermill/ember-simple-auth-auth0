@@ -4,6 +4,6 @@ import Auth0UrlHashAuthenticator from 'ember-simple-auth-auth0/authenticators/au
 export default Auth0UrlHashAuthenticator.extend({
   auth0: service(),
   authenticate(options) {
-    return this._performSilentAuth(options);
+    return this.performSilentAuth(options);
   }
 });
