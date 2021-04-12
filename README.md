@@ -22,6 +22,7 @@ Due to the performance & optimization reasons we have removed that in that fork 
 **Example:**
 ```html
 <script defer integrity="" src="{{rootURL}}assets/vendor.js"></script>
+<script defer integrity="" src="https://cdnjs.cloudflare.com/ajax/libs/auth0-js/9.15.0/auth0.min.js"></script>
 <script defer integrity="" src="https://cdn.auth0.com/js/lock/11.26.3/lock.min.js"></script>
 <script defer integrity="" src="{{rootURL}}assets/my-awesome-app.js"></script>
 <!-- defer attribute will load js files in parallel but execute them sequentially -->
