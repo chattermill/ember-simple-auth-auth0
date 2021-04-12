@@ -125,6 +125,8 @@ export default Service.extend({
    * @param {Object} options
    */
   silentAuth(options) {
+    if (this.skipSilentAuth) { return; }
+
     if(!options) {
       options = this._getSilentAuthOptions();
     }
