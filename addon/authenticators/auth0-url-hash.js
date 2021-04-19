@@ -6,7 +6,7 @@ export default Auth0BaseAuthenticator.extend({
   auth0: service(),
   session: service(),
   authenticate(urlHashData) {
-    if (this.auth0.skipSilentAuth) { return; }
+    if (this.auth0.skipSilentAuth) { return RSVP.resolve(); }
 
     return new RSVP.Promise((resolve, reject) => {
       this.auth0.resolveAuthResult(urlHashData, resolve, reject);

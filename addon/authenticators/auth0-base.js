@@ -20,7 +20,7 @@ export default BaseAuthenticator.extend({
 
   // performs silent authentication & handles the result in a promise.
   performSilentAuth(options) {
-    if (this.auth0.skipSilentAuth) { return; }
+    if (this.auth0.skipSilentAuth) { return RSVP.resolve(); }
 
     return new RSVP.Promise((resolve, reject) => {
       try {
